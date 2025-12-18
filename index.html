@@ -3,413 +3,170 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>EXW | Christmas Card</title>
-
+  <title>Christmas Card</title>
   <style>
     :root{
-      /* Theme colors (brown, green, red) */
-      --brown-900:#1b0f08;
-      --brown-700:#3a1f10;
-      --brown-500:#8a5a35;
-      --cookie:#c98a55;
-
-      --green-600:#1f8a4c;
-      --green-500:#2fbf71;
-
-      --red-700:#b0201b;
-      --red-600:#d73b2e;
-
-      --cream:#fff7ec;
-      --white:#ffffff;
-
-      --shadow: 0 26px 80px rgba(0,0,0,.55);
-      --radius: 26px;
-      --maxw: 980px;
+      --bg1:#fff7f0;
+      --bg2:#f7fff6;
+      --accent:#e53935;
+      --shadow: 0 18px 45px rgba(0,0,0,.12);
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{ box-sizing:border-box; }
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color: var(--cream);
-      background:
-        radial-gradient(1200px 800px at 18% 16%, rgba(47,191,113,.18), transparent 62%),
-        radial-gradient(900px 700px at 80% 22%, rgba(215,59,46,.16), transparent 62%),
-        radial-gradient(900px 900px at 50% 105%, rgba(201,138,85,.18), transparent 62%),
-        linear-gradient(160deg, #070403, var(--brown-900) 55%, #050303);
-      overflow-x:hidden;
-    }
-
-    /* Snow canvas */
-    #snow{
-      position:fixed;
-      inset:0;
-      z-index:0;
-      pointer-events:none;
-    }
-
-    .wrap{
-      position:relative;
-      z-index:1;
-      padding: 40px 18px 70px;
-      display:flex;
-      justify-content:center;
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 700px at 20% 10%, var(--bg2), transparent 60%),
+                  radial-gradient(900px 600px at 80% 30%, var(--bg1), transparent 60%),
+                  linear-gradient(180deg, #ffffff, #f7f7f7);
     }
 
     .card{
-      width: min(var(--maxw), 100%);
-      border-radius: var(--radius);
-      background:
-        linear-gradient(180deg, rgba(58,31,16,.65), rgba(27,15,8,.82));
+      width:min(920px, 92vw);
+      min-height:min(520px, 86vh);
+      background: rgba(255,255,255,.85);
+      border-radius: 28px;
       box-shadow: var(--shadow);
-      border: 1px solid rgba(201,138,85,.28);
+      border: 1px solid rgba(0,0,0,.06);
       overflow:hidden;
-      backdrop-filter: blur(10px);
+      position:relative;
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 12px;
+      padding: 28px;
     }
 
-    header{
-      padding: 30px 24px 12px;
-      text-align:center;
-    }
-
-    .logoRow{
+    .left{
       display:flex;
+      flex-direction:column;
       justify-content:center;
-      align-items:center;
-      gap:12px;
-      margin-bottom: 10px;
+      padding: 10px 10px 10px 6px;
     }
 
-    .logo{
-      width: 140px;
-      max-width: 55vw;
-      height:auto;
-      display:block;
-      filter: drop-shadow(0 12px 18px rgba(0,0,0,.45));
+    h1{
+      margin:0 0 10px;
+      font-size: clamp(28px, 4vw, 54px);
+      line-height:1.05;
+      letter-spacing:-0.02em;
+    }
+
+    p{
+      margin: 0;
+      font-size: clamp(14px, 1.6vw, 18px);
+      line-height:1.65;
+      opacity:.85;
+      max-width: 42ch;
     }
 
     .badge{
       display:inline-flex;
       align-items:center;
       gap:10px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(201,138,85,.14);
-      border: 1px solid rgba(201,138,85,.22);
-      color: var(--cream);
-      font-size: 13px;
-      letter-spacing:.25px;
-      margin: 8px auto 12px;
-    }
-    .badge .dot{
-      width:10px;height:10px;border-radius:50%;
-      background: radial-gradient(circle at 30% 30%, var(--white), var(--red-600));
-      box-shadow: 0 0 0 3px rgba(215,59,46,.18);
+      margin-top:18px;
+      padding:10px 14px;
+      border-radius:999px;
+      background: rgba(229,57,53,.10);
+      border: 1px solid rgba(229,57,53,.22);
+      width: fit-content;
+      font-weight:600;
+      color:#8e1a17;
     }
 
-    h1{
-      margin: 6px 0 8px;
-      font-size: clamp(28px, 4.8vw, 52px);
-      line-height:1.08;
-      letter-spacing:-.8px;
-      text-shadow: 0 10px 30px rgba(0,0,0,.55);
-    }
-
-    .sub{
-      margin:0 auto;
-      max-width: 64ch;
-      color: rgba(255,247,236,.86);
-      font-size: 15.5px;
-      line-height:1.6;
-    }
-
-    .hero{
-      position:relative;
-      padding: 18px 18px 10px;
+    .right{
       display:grid;
       place-items:center;
+      position:relative;
     }
 
-    /* Wiggle animation (closer to Ready-Market feel: rotate + side sway + tiny bounce) */
-    .gingerWrap{
-      width: min(320px, 68vw);
-      transform-origin: 50% 65%;
-      animation: wiggle 1.05s cubic-bezier(.45,0,.55,1) infinite;
-      filter: drop-shadow(0 22px 26px rgba(0,0,0,.40));
+    .ginger-wrap{
+      width:min(320px, 55vw);
+      aspect-ratio: 3/4;
+      display:grid;
+      place-items:center;
+      position:relative;
+      transform: translateZ(0);
+    }
+
+    /* The wiggle animation (GIF-like) */
+    .ginger{
+      width:100%;
+      height:auto;
+      filter: drop-shadow(0 18px 24px rgba(0,0,0,.18));
+      transform-origin: 50% 85%;
+      animation: wiggle 900ms ease-in-out infinite;
       will-change: transform;
       user-select:none;
+      -webkit-user-drag:none;
+      cursor:pointer;
     }
 
     @keyframes wiggle{
-      0%   { transform: translateX(-10px) rotate(-10deg) translateY(0px) scale(1); }
-      25%  { transform: translateX(-2px)  rotate(-2deg)  translateY(-2px) scale(1.01); }
-      50%  { transform: translateX(10px)  rotate(10deg)  translateY(0px) scale(1); }
-      75%  { transform: translateX(2px)   rotate(2deg)   translateY(-2px) scale(1.01); }
-      100% { transform: translateX(-10px) rotate(-10deg) translateY(0px) scale(1); }
+      0%   { transform: rotate(-6deg) translateX(-6px); }
+      25%  { transform: rotate( 0deg) translateX( 0px); }
+      50%  { transform: rotate( 6deg) translateX( 6px); }
+      75%  { transform: rotate( 0deg) translateX( 0px); }
+      100% { transform: rotate(-6deg) translateX(-6px); }
     }
 
-    .sparkles{
+    /* little “snow dots” decor */
+    .dot{
       position:absolute;
-      inset:0;
-      pointer-events:none;
+      width:10px;height:10px;border-radius:50%;
+      background: rgba(229,57,53,.20);
+      box-shadow: 0 0 0 6px rgba(229,57,53,.06);
+      animation: floaty 4.6s ease-in-out infinite;
       opacity:.9;
     }
-    .sparkles span{
-      position:absolute;
-      width:10px;height:10px;
-      border-radius:2px;
-      transform: rotate(45deg);
-      animation: twinkle 1.6s ease-in-out infinite;
-      background: rgba(47,191,113,.85);
-      box-shadow: 0 0 0 6px rgba(47,191,113,.10);
-    }
-    .sparkles span.r{
-      background: rgba(215,59,46,.85);
-      box-shadow: 0 0 0 6px rgba(215,59,46,.10);
-    }
-    @keyframes twinkle{
-      0%,100% { transform: rotate(45deg) scale(.7); opacity:.28; }
-      50%     { transform: rotate(45deg) scale(1.15); opacity:.9; }
+    .dot:nth-child(2){ left:10%; top:18%; animation-duration:5.3s; }
+    .dot:nth-child(3){ left:82%; top:20%; animation-duration:6.1s; background: rgba(67,160,71,.20); box-shadow:0 0 0 6px rgba(67,160,71,.06); }
+    .dot:nth-child(4){ left:68%; top:76%; animation-duration:5.7s; }
+    .dot:nth-child(5){ left:18%; top:74%; animation-duration:6.4s; background: rgba(67,160,71,.20); box-shadow:0 0 0 6px rgba(67,160,71,.06); }
+
+    @keyframes floaty{
+      0%,100%{ transform: translateY(0); }
+      50%{ transform: translateY(-16px); }
     }
 
-    .content{
-      padding: 8px 24px 26px;
-      text-align:center;
-    }
-    .msg{
-      margin: 0 auto;
-      max-width: 72ch;
-      font-size: 14.8px;
-      line-height: 1.75;
-      color: rgba(255,247,236,.88);
-    }
-
-    .divider{
-      width:min(520px, 92%);
-      height:1px;
-      margin: 18px auto 14px;
-      background: linear-gradient(90deg, transparent, rgba(201,138,85,.55), transparent);
-    }
-
-    footer{
-      padding: 18px 22px 22px;
-      display:flex;
-      justify-content:center;
-      text-align:center;
-      color: rgba(255,247,236,.68);
-      font-size: 12.5px;
-      border-top: 1px solid rgba(201,138,85,.18);
-      background: rgba(0,0,0,.12);
-    }
-
-    /* Logo fallback text (if image fails) */
-    .logoFallback{
-      display:none;
-      font-weight:800;
-      letter-spacing:.4px;
-      padding:10px 14px;
-      border-radius:14px;
-      background: rgba(201,138,85,.14);
-      border:1px solid rgba(201,138,85,.22);
-    }
-
-    /* Respect reduced motion */
-    @media (prefers-reduced-motion: reduce){
-      .gingerWrap{ animation:none; }
-      .sparkles span{ animation:none; }
+    /* Mobile layout */
+    @media (max-width: 780px){
+      .card{ grid-template-columns: 1fr; padding: 22px; }
+      .left{ text-align:center; align-items:center; }
+      p{ max-width: 52ch; }
     }
   </style>
 </head>
 
 <body>
-  <canvas id="snow"></canvas>
+  <main class="card">
+    <section class="left">
+      <h1>Merry Christmas 🎄</h1>
+      <p>
+        Wishing you warm moments, bright days, and a sweet finish to the year.
+      </p>
+      <div class="badge">Tap the gingerbread to pause/resume</div>
+    </section>
 
-  <main class="wrap">
-    <section class="card" role="document" aria-label="EXW Christmas e-card">
-      <header>
-        <div class="logoRow">
-          <!-- IMPORTANT: put your logo here: assets/exw-logo.png (no spaces in filename) -->
-          <img
-            class="logo"
-            src="assets/exw-logo.png"
-            alt="EXW Logo"
-            onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='inline-block';"
-          />
-          <div id="logoFallback" class="logoFallback">EXW</div>
-        </div>
-
-        <div class="badge"><span class="dot"></span><span>Season’s Greetings</span></div>
-
-        <h1>Merry Christmas &amp; Happy New Year</h1>
-        <p class="sub">
-          Wishing you a warm holiday season and a successful year ahead — from everyone at Excellence Wire (EXW).
-        </p>
-      </header>
-
-      <section class="hero" aria-label="Animated gingerbread">
-        <div class="sparkles" aria-hidden="true">
-          <span style="left:12%; top:18%; animation-delay:.15s"></span>
-          <span class="r" style="left:22%; top:62%; animation-delay:.65s"></span>
-          <span class="r" style="left:78%; top:22%; animation-delay:.35s"></span>
-          <span style="left:88%; top:62%; animation-delay:.95s"></span>
-          <span style="left:52%; top:10%; animation-delay:.55s"></span>
-        </div>
-
-        <!-- Cute gingerbread (original SVG) -->
-        <svg class="gingerWrap" viewBox="0 0 360 420" xmlns="http://www.w3.org/2000/svg" aria-label="Cute gingerbread man">
-          <!-- Shadow -->
-          <ellipse cx="180" cy="392" rx="105" ry="18" fill="rgba(0,0,0,.25)"/>
-
-          <!-- Body -->
-          <path d="M180 64
-                   c-34 0-62 28-62 62
-                   c0 16 6 31 15 42
-                   c-36 10-62 43-62 82
-                   c0 38 21 69 53 80
-                   c-18 26-30 62-30 90
-                   c0 34 17 58 44 66
-                   c11 3 20 3 27 0
-                   c7-3 13-7 18-12
-                   c5 5 11 9 18 12
-                   c7 3 16 3 27 0
-                   c27-8 44-32 44-66
-                   c0-28-12-64-30-90
-                   c32-11 53-42 53-80
-                   c0-39-26-72-62-82
-                   c9-11 15-26 15-42
-                   c0-34-28-62-62-62
-                   c-22 0-41 12-52 30
-                   c-11-18-30-30-52-30z"
-                fill="#c98a55" stroke="#7a3f22" stroke-width="10" stroke-linejoin="round"/>
-
-          <!-- Icing outline -->
-          <path d="M112 132
-                   c18 14 36-14 54 0
-                   s36 14 54 0
-                   s36-14 54 0"
-                fill="none" stroke="#fff7ec" stroke-width="12" stroke-linecap="round"/>
-
-          <!-- Arms icing -->
-          <path d="M88 236 c22 10 44 10 66 0" fill="none" stroke="#fff7ec" stroke-width="10" stroke-linecap="round" opacity=".95"/>
-          <path d="M206 236 c22 10 44 10 66 0" fill="none" stroke="#fff7ec" stroke-width="10" stroke-linecap="round" opacity=".95"/>
-
-          <!-- Legs icing -->
-          <path d="M118 320 c20 16 40-16 60 0" fill="none" stroke="#fff7ec" stroke-width="12" stroke-linecap="round"/>
-          <path d="M182 320 c20 16 40-16 60 0" fill="none" stroke="#fff7ec" stroke-width="12" stroke-linecap="round"/>
-
-          <!-- Face -->
-          <circle cx="156" cy="126" r="9" fill="#2b1b14"/>
-          <circle cx="204" cy="126" r="9" fill="#2b1b14"/>
-          <path d="M156 154 q24 20 48 0" fill="none" stroke="#2b1b14" stroke-width="10" stroke-linecap="round"/>
-          <circle cx="142" cy="146" r="10" fill="#d73b2e" opacity=".35"/>
-          <circle cx="218" cy="146" r="10" fill="#d73b2e" opacity=".35"/>
-
-          <!-- Buttons -->
-          <circle cx="180" cy="214" r="11" fill="#d73b2e" stroke="#8f1f1b" stroke-width="4"/>
-          <circle cx="180" cy="252" r="11" fill="#2fbf71" stroke="#166a3a" stroke-width="4"/>
-          <circle cx="180" cy="290" r="11" fill="#d73b2e" stroke="#8f1f1b" stroke-width="4"/>
-
-          <!-- Scarf (green + red stripes) -->
-          <path d="M122 184
-                   c10-20 24-30 58-30
-                   c34 0 48 10 58 30
-                   c-10 18-26 28-58 28
-                   c-32 0-48-10-58-28z"
-                fill="#2fbf71" stroke="#166a3a" stroke-width="6" stroke-linejoin="round"/>
-          <path d="M150 154 h18 v58 h-18z" fill="#d73b2e" opacity=".95"/>
-          <path d="M192 154 h18 v58 h-18z" fill="#d73b2e" opacity=".95"/>
-          <path d="M172 154 h16 v58 h-16z" fill="#2fbf71" opacity=".95"/>
-
-          <!-- Santa Hat -->
-          <path d="M126 108
-                   c6-34 34-56 70-56
-                   c38 0 62 22 74 52
-                   c-16 10-38 12-56 2
-                   c-18-10-34-10-50 0
-                   c-18 10-26 12-38 2z"
-                fill="#d73b2e" stroke="#8f1f1b" stroke-width="6" stroke-linejoin="round"/>
-          <path d="M120 112
-                   c18 16 42 18 120 4"
-                fill="none" stroke="#fff7ec" stroke-width="16" stroke-linecap="round"/>
-          <circle cx="276" cy="110" r="12" fill="#fff7ec"/>
-        </svg>
-      </section>
-
-      <section class="content">
-        <div class="divider"></div>
-        <p class="msg">
-          Thank you for your trust and partnership throughout the year. We look forward to creating more value
-          together in the year ahead.<br><br>
-          Warm wishes for a joyful holiday season and a successful New Year.
-        </p>
-      </section>
-
-      <footer>
-        © <span id="year"></span> Excellence Wire Ind. Co., Ltd. (EXW)
-      </footer>
+    <section class="right">
+      <div class="ginger-wrap" aria-label="Wiggling gingerbread man">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <!-- Put your image file in the repo as: gingerbread.jpg -->
+        <img class="ginger" id="ginger" src="gingerbread.jpg" alt="Gingerbread man" />
+      </div>
     </section>
   </main>
 
   <script>
-    // Year
-    document.getElementById("year").textContent = new Date().getFullYear();
+    // Click to pause/resume animation (handy when previewing)
+    const ginger = document.getElementById("ginger");
+    let paused = false;
 
-    // Snow particles (canvas)
-    const canvas = document.getElementById("snow");
-    const ctx = canvas.getContext("2d");
-    let w, h, dpr;
-
-    function resize(){
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      w = canvas.width = Math.floor(window.innerWidth * dpr);
-      h = canvas.height = Math.floor(window.innerHeight * dpr);
-      canvas.style.width = window.innerWidth + "px";
-      canvas.style.height = window.innerHeight + "px";
-      ctx.setTransform(dpr,0,0,dpr,0,0);
-    }
-    window.addEventListener("resize", resize, {passive:true});
-    resize();
-
-    const flakes = [];
-    const COUNT = Math.min(140, Math.max(70, Math.floor(window.innerWidth / 10)));
-
-    function rand(min,max){ return Math.random()*(max-min)+min; }
-
-    for(let i=0;i<COUNT;i++){
-      flakes.push({
-        x: rand(0, window.innerWidth),
-        y: rand(0, window.innerHeight),
-        r: rand(0.8, 2.4),
-        s: rand(0.4, 1.6),
-        a: rand(0.15, 0.85),
-        vx: rand(-0.25, 0.25),
-      });
-    }
-
-    function tick(){
-      ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
-
-      for(const f of flakes){
-        f.y += f.s;
-        f.x += f.vx;
-
-        if(f.y > window.innerHeight + 6){
-          f.y = -10;
-          f.x = rand(0, window.innerWidth);
-        }
-        if(f.x < -10) f.x = window.innerWidth + 10;
-        if(f.x > window.innerWidth + 10) f.x = -10;
-
-        ctx.beginPath();
-        ctx.fillStyle = `rgba(255,247,236,${f.a})`; // cream snow (fits brown theme)
-        ctx.arc(f.x, f.y, f.r, 0, Math.PI*2);
-        ctx.fill();
-      }
-
-      requestAnimationFrame(tick);
-    }
-    tick();
+    ginger.addEventListener("click", () => {
+      paused = !paused;
+      ginger.style.animationPlayState = paused ? "paused" : "running";
+    });
   </script>
 </body>
 </html>
