@@ -210,13 +210,13 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
-      display:block;
-      animation: none;        /* stop wiggling */
-      transform: none;        /* lock position */
+      display:block;      
+      animation: none;
+      transform: none;
       user-select:none;
       -webkit-user-drag:none;
-      filter: drop-shadow(0 12px 18px rgba(0,0,0,.18));
-    }
+      filter: none; /* remove shadow around the GIF */
+}
 
     @keyframes wiggle{
       0%   { transform: rotate(-7deg) translateX(-6px); }
