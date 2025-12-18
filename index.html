@@ -8,14 +8,14 @@
 
   <style>
     :root{
-      --bg1:#0b1b3a;
-      --bg2:#0f3b2e;
-      --card:#ffffff;
-      --ink:#152033;
-      --muted:#52627a;
+      --bg1:#07142d;
+      --bg2:#0b2e3a;
+      --card: rgba(255,255,255,.92);
+      --ink:#0f1a2b;
+      --muted:#4d5d76;
       --accent:#d73b2e;
       --gold:#f6c453;
-      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --shadow: 0 24px 80px rgba(0,0,0,.38);
       --radius: 22px;
       --maxw: 980px;
     }
@@ -27,69 +27,57 @@
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
       color:var(--ink);
       background:
-        radial-gradient(1200px 800px at 20% 15%, rgba(255,255,255,.12), transparent 60%),
-        radial-gradient(900px 700px at 80% 30%, rgba(246,196,83,.10), transparent 60%),
-        radial-gradient(1100px 900px at 50% 95%, rgba(215,59,46,.10), transparent 60%),
+        radial-gradient(1200px 800px at 20% 15%, rgba(255,255,255,.10), transparent 60%),
+        radial-gradient(900px 700px at 80% 25%, rgba(246,196,83,.10), transparent 60%),
+        radial-gradient(1200px 900px at 50% 95%, rgba(215,59,46,.10), transparent 60%),
         linear-gradient(140deg, var(--bg1), var(--bg2));
       overflow-x:hidden;
     }
 
-    /* Snow */
+    /* ===== Snow layers ===== */
     .snow{
       position:fixed; inset:0;
       pointer-events:none;
-      opacity:.9;
       z-index:0;
     }
     .flake{
       position:absolute;
-      top:-10vh;
+      top:-12vh;
       width:6px;height:6px;
       border-radius:50%;
-      background:rgba(255,255,255,.9);
+      background:rgba(255,255,255,.92);
       filter: blur(.2px);
-      animation: fall linear infinite;
+      animation-name: fall;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      will-change: transform;
     }
     @keyframes fall{
-      to { transform: translateY(120vh); }
+      to { transform: translate3d(var(--drift, 0px), 120vh, 0); }
     }
 
+    /* ===== Layout ===== */
     .wrap{
       position:relative;
       z-index:1;
-      padding: 42px 18px 70px;
+      padding: 44px 18px 76px;
       display:flex;
       justify-content:center;
     }
-
     .card{
       width: min(var(--maxw), 100%);
-      background: rgba(255,255,255,.92);
+      background: var(--card);
       backdrop-filter: blur(10px);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow:hidden;
-      border: 1px solid rgba(255,255,255,.35);
+      border: 1px solid rgba(255,255,255,.30);
     }
 
     .top{
       position:relative;
-      padding: 30px 22px 0;
+      padding: 34px 22px 0;
       text-align:center;
-    }
-
-    .brandMark{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      margin-bottom: 8px;
-    }
-    .brandMark img{
-      height: 26px;
-      width: auto;
-      display:block;
-      filter: drop-shadow(0 10px 18px rgba(0,0,0,.15));
     }
 
     .badge{
@@ -98,63 +86,79 @@
       align-items:center;
       padding: 8px 14px;
       border-radius: 999px;
-      background: rgba(21,32,51,.06);
-      color: rgba(21,32,51,.85);
+      background: rgba(15,26,43,.06);
+      color: rgba(15,26,43,.85);
       font-size: 13px;
       letter-spacing:.2px;
     }
     .dot{
       width:10px;height:10px;border-radius:50%;
       background: radial-gradient(circle at 30% 30%, #fff, var(--gold));
-      box-shadow: 0 0 0 3px rgba(246,196,83,.22);
+      box-shadow: 0 0 0 3px rgba(246,196,83,.20);
     }
 
     h1{
-      margin: 14px 0 10px;
+      margin: 16px 0 10px;
       font-size: clamp(28px, 4.2vw, 46px);
       line-height:1.08;
       letter-spacing: -0.6px;
-      color: #10203a;
+      color: #0b1a33;
     }
     .sub{
       margin:0 auto;
-      max-width: 62ch;
+      max-width: 70ch;
       color: var(--muted);
       font-size: 15.5px;
-      line-height:1.55;
+      line-height:1.58;
     }
 
+    /* ===== Hero / animation (closer to Ready-Market style: smooth sway + tiny bounce) ===== */
     .hero{
       position:relative;
-      margin: 22px auto 0;
-      width:min(780px, 100%);
-      padding: 26px 18px 10px;
+      margin: 26px auto 0;
+      width:min(820px, 100%);
+      padding: 22px 18px 8px;
       display:grid;
       place-items:center;
     }
 
-    /* Closer “Ready-Market” feel: sway + slight bob + micro squash/stretch */
-    .gingerWrap{
-      transform-origin: 50% 75%;
-      animation: sway 1.25s cubic-bezier(.45,0,.2,1) infinite;
+    .ginger-wrap{
+      position:relative;
+      width: 260px;
+      max-width: 62vw;
+      display:grid;
+      place-items:center;
       will-change: transform;
-    }
-    @keyframes sway{
-      0%   { transform: translateX(-10px) rotate(-7deg) translateY(0px) scaleX(1.00) scaleY(1.00); }
-      25%  { transform: translateX(-4px)  rotate(-2deg) translateY(2px) scaleX(0.99) scaleY(1.01); }
-      50%  { transform: translateX(10px)  rotate(7deg)  translateY(0px) scaleX(1.00) scaleY(1.00); }
-      75%  { transform: translateX(4px)   rotate(2deg)  translateY(2px) scaleX(0.99) scaleY(1.01); }
-      100% { transform: translateX(-10px) rotate(-7deg) translateY(0px) scaleX(1.00) scaleY(1.00); }
+      /* Subtle vertical breathing */
+      animation: float 2.4s ease-in-out infinite;
     }
 
+    /* The “wiggle left/right” */
     .ginger{
-      width: 220px;
-      max-width: 55vw;
-      filter: drop-shadow(0 14px 18px rgba(0,0,0,.18));
+      width: 100%;
+      transform-origin: 50% 68%;
+      filter: drop-shadow(0 16px 20px rgba(0,0,0,.20));
       user-select:none;
-      display:block;
+      will-change: transform;
+      animation: sway 1.35s cubic-bezier(.45,0,.55,1) infinite;
     }
 
+    /* Float: tiny up/down breathing */
+    @keyframes float{
+      0%,100%{ transform: translateY(0px); }
+      50%{ transform: translateY(-6px); }
+    }
+
+    /* Sway: rotate + shift (like “wobble”, not robotic) */
+    @keyframes sway{
+      0%   { transform: rotate(-7deg) translateX(-8px); }
+      25%  { transform: rotate(-2deg) translateX(-2px); }
+      50%  { transform: rotate(7deg)  translateX(8px); }
+      75%  { transform: rotate(2deg)  translateX(2px); }
+      100% { transform: rotate(-7deg) translateX(-8px); }
+    }
+
+    /* Sparkles */
     .sparkles{
       position:absolute;
       inset:0;
@@ -168,73 +172,104 @@
       transform: rotate(45deg);
       opacity:.75;
       animation: twinkle 1.6s ease-in-out infinite;
+      will-change: transform, opacity;
     }
     @keyframes twinkle{
-      0%,100%{ transform: rotate(45deg) scale(.75); opacity:.35; }
-      50%{ transform: rotate(45deg) scale(1.2); opacity:.85; }
+      0%,100%{ transform: rotate(45deg) scale(.72); opacity:.35; }
+      50%{ transform: rotate(45deg) scale(1.25); opacity:.9; }
     }
 
+    /* ===== Message box ===== */
     .content{ padding: 10px 28px 26px; }
     .letter{
       background: #fff;
-      border: 1px solid rgba(21,32,51,.10);
+      border: 1px solid rgba(15,26,43,.10);
       border-radius: 18px;
       padding: 22px 20px;
       line-height:1.75;
-      color:#17223a;
-      box-shadow: 0 10px 30px rgba(16,32,58,.08);
+      color:#121f36;
+      box-shadow: 0 10px 34px rgba(11,26,51,.10);
+      text-align:left;
     }
     .letter p{ margin: 0 0 14px; }
     .letter p:last-child{ margin:0; }
-    .sig{ margin-top: 16px; color: rgba(21,32,51,.9); font-weight: 650; }
-    .muted{ color: rgba(21,32,51,.65); font-weight: 500; }
+    .sig{
+      margin-top: 16px;
+      color: rgba(15,26,43,.92);
+      font-weight: 700;
+    }
+    .muted{
+      color: rgba(15,26,43,.62);
+      font-weight: 600;
+    }
 
+    /* ===== Footer with real logo ===== */
     .footer{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap: 16px;
       padding: 18px 22px 22px;
-      border-top: 1px solid rgba(21,32,51,.08);
-      background: rgba(255,255,255,.6);
+      border-top: 1px solid rgba(15,26,43,.08);
+      background: rgba(255,255,255,.58);
       flex-wrap:wrap;
     }
+
     .brand{
       display:flex;
       align-items:center;
-      gap: 12px;
+      gap: 14px;
       min-width: 240px;
     }
-    .logoImg{
+
+    /* Logo image (your real EXW logo) */
+    .brand-logo{
+      width: 110px;
       height: 42px;
-      width: auto;
+      object-fit: contain;
       display:block;
       border-radius: 10px;
-      filter: drop-shadow(0 10px 18px rgba(0,0,0,.18));
+      background: rgba(255,255,255,.75);
+      padding: 6px 10px;
+      box-shadow: 0 10px 18px rgba(0,0,0,.10);
+      border: 1px solid rgba(15,26,43,.08);
     }
-    .brand strong{ display:block; line-height:1.1; }
-    .brand small{ color: rgba(21,32,51,.6); }
 
-    .fine{ color: rgba(21,32,51,.55); font-size: 12.5px; }
+    /* Fallback badge if logo missing */
+    .logo-fallback{
+      width:110px;height:42px;border-radius:10px;
+      display:none;
+      background: linear-gradient(135deg, var(--accent), #ff7a59);
+      color:#fff;
+      font-weight: 900;
+      letter-spacing:.5px;
+      align-items:center;
+      justify-content:center;
+      box-shadow: 0 10px 18px rgba(215,59,46,.22);
+    }
+
+    .brand strong{ display:block; line-height:1.1; }
+    .brand small{ color: rgba(15,26,43,.60); }
+
+    .fine{
+      color: rgba(15,26,43,.55);
+      font-size: 12.5px;
+    }
 
     @media (max-width:520px){
       .content{ padding: 10px 16px 20px; }
       .letter{ padding: 18px 16px; }
+      .brand-logo, .logo-fallback{ width:96px; }
     }
   </style>
 </head>
 
 <body>
-  <div class="snow" id="snow"></div>
+  <div class="snow" id="snow" aria-hidden="true"></div>
 
   <main class="wrap">
     <section class="card" role="document" aria-label="Christmas e-card">
       <header class="top">
-        <!-- Small brand mark -->
-        <div class="brandMark" aria-label="EXW logo">
-          <img src="assets/exw-logo.png" alt="EXW logo" />
-        </div>
-
         <div class="badge" aria-label="Season's Greetings badge">
           <span class="dot" aria-hidden="true"></span>
           <span>Season’s Greetings</span>
@@ -254,9 +289,10 @@
             <span style="left:50%; top:10%; animation-delay:.5s"></span>
           </div>
 
-          <div class="gingerWrap">
+          <div class="ginger-wrap" aria-hidden="false">
             <!-- Gingerbread Man (SVG) -->
             <svg class="ginger" viewBox="0 0 220 260" xmlns="http://www.w3.org/2000/svg" aria-label="Cute gingerbread man wiggling">
+              <!-- Body -->
               <path d="M110 26
                        c-20 0-36 16-36 36
                        c0 9 3 17 8 24
@@ -278,21 +314,25 @@
                        c-6-11-18-18-31-18z"
                     fill="#c98a55" stroke="#8a4f2b" stroke-width="6" stroke-linejoin="round"/>
 
+              <!-- Icing -->
               <path d="M63 98 c12 10 24-10 36 0 s24 10 36 0 s24-10 36 0"
                     fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round"/>
               <path d="M75 210 c10 10 20-10 30 0 s20 10 30 0 s20-10 30 0"
                     fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round"/>
 
+              <!-- Face -->
               <circle cx="88" cy="68" r="7" fill="#2b1b14"/>
               <circle cx="132" cy="68" r="7" fill="#2b1b14"/>
               <path d="M90 88 q20 18 40 0" fill="none" stroke="#2b1b14" stroke-width="7" stroke-linecap="round"/>
               <circle cx="75" cy="84" r="8" fill="#e36b6b" opacity=".9"/>
               <circle cx="145" cy="84" r="8" fill="#e36b6b" opacity=".9"/>
 
+              <!-- Buttons -->
               <circle cx="110" cy="128" r="8" fill="#d73b2e" stroke="#9e241b" stroke-width="3"/>
               <circle cx="110" cy="155" r="8" fill="#2e7bd7" stroke="#1d4f9e" stroke-width="3"/>
               <circle cx="110" cy="182" r="8" fill="#2fbf71" stroke="#1b7b47" stroke-width="3"/>
 
+              <!-- Santa hat -->
               <path d="M74 44
                        c10-22 42-30 64-10
                        c16 15 20 33 9 47
@@ -335,23 +375,44 @@
 
       <footer class="footer">
         <div class="brand" aria-label="Brand">
-          <img class="logoImg" src="assets/exw-logo.png" alt="EXW logo" />
+          <!-- Real logo -->
+          <img
+            id="exwLogo"
+            class="brand-logo"
+            src="assets/exw-logo.png"
+            alt="EXW logo"
+            loading="eager"
+          />
+          <!-- Fallback if logo fails to load -->
+          <div id="logoFallback" class="logo-fallback" aria-hidden="true">EXW</div>
+
           <div>
             <strong>Excellence Wire (EXW)</strong>
             <small>OEM/ODM Structured Cabling Manufacturer</small>
           </div>
         </div>
+
         <div class="fine">© <span id="year"></span> EXW. All rights reserved.</div>
       </footer>
     </section>
   </main>
 
   <script>
+    // Year
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Snow generator
+    // Logo fallback if image path is wrong or not uploaded yet
+    const logo = document.getElementById("exwLogo");
+    const fallback = document.getElementById("logoFallback");
+    logo.addEventListener("error", () => {
+      logo.style.display = "none";
+      fallback.style.display = "flex";
+      fallback.setAttribute("aria-hidden", "false");
+    });
+
+    // Snow generator (lightweight)
     const snow = document.getElementById("snow");
-    const COUNT = 70;
+    const COUNT = 85;
 
     function rand(min, max){ return Math.random()*(max-min)+min; }
 
@@ -359,15 +420,29 @@
       const f = document.createElement("div");
       f.className = "flake";
       const size = rand(2, 7);
+      const drift = rand(-22, 22);
+
       f.style.width = size + "px";
       f.style.height = size + "px";
       f.style.left = rand(0, 100) + "vw";
-      f.style.opacity = rand(0.25, 0.95);
+      f.style.opacity = rand(0.22, 0.95);
       f.style.animationDuration = rand(6, 16) + "s";
       f.style.animationDelay = rand(-16, 0) + "s";
-      f.style.transform = `translateY(${rand(-30, 10)}vh)`;
+      f.style.setProperty("--drift", drift + "px");
+      f.style.transform = `translate3d(0, ${rand(-30, 10)}vh, 0)`;
+
       snow.appendChild(f);
     }
+
+    // Make sparkles feel a bit more "alive" (randomize positions slightly on load)
+    const sparks = document.querySelectorAll(".sparkles span");
+    sparks.forEach((s) => {
+      const x = parseFloat(s.style.left || "50");
+      const y = parseFloat(s.style.top || "50");
+      s.style.left = Math.min(96, Math.max(2, x + rand(-3, 3))) + "%";
+      s.style.top  = Math.min(90, Math.max(2, y + rand(-3, 3))) + "%";
+    });
   </script>
 </body>
 </html>
+
