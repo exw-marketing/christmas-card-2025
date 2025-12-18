@@ -3,319 +3,170 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>EXW | Merry Christmas</title>
-  <meta name="description" content="Christmas Card from EXW" />
-
+  <title>Christmas Card</title>
   <style>
     :root{
-      /* brighter theme (brown, green, red) */
-      --bg-green: #12e07a;
-      --bg-red:   #ff3b3b;
-      --bg-dark:  #07060a;
-
-      --card-brown-1:#2a140c;
-      --card-brown-2:#3a1b0f;
-
-      --cream:#fff6ea;
-      --cream-2:#ffe8cf;
-
-      --gold:#ffd36b;
-      --line: rgba(255, 211, 107, .35);
-
-      --shadow: 0 28px 90px rgba(0,0,0,.55);
-      --radius: 28px;
+      --bg1:#fff7f0;
+      --bg2:#f7fff6;
+      --accent:#e53935;
+      --shadow: 0 18px 45px rgba(0,0,0,.12);
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{ box-sizing:border-box; }
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color: var(--cream);
-      background:
-        radial-gradient(900px 700px at 20% 25%, rgba(18,224,122,.35), transparent 60%),
-        radial-gradient(900px 700px at 85% 35%, rgba(255,59,59,.35), transparent 62%),
-        radial-gradient(900px 700px at 50% 90%, rgba(255,211,107,.16), transparent 65%),
-        linear-gradient(180deg, #05040a, #0b0710 55%, #06040a);
-      overflow-x:hidden;
-    }
-
-    /* sparkle snow layer */
-    .snow{
-      position:fixed; inset:0;
-      pointer-events:none;
-      z-index:0;
-      opacity: .95;
-    }
-    .flake{
-      position:absolute;
-      top:-12vh;
-      width:6px;height:6px;
-      border-radius:50%;
-      background: rgba(255,255,255,.9);
-      filter: blur(.15px);
-      animation: fall linear infinite;
-    }
-    @keyframes fall{
-      to { transform: translateY(130vh); }
-    }
-
-    /* layout */
-    .wrap{
-      position:relative;
-      z-index:1;
-      min-height:100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding: 56px 18px 64px;
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 700px at 20% 10%, var(--bg2), transparent 60%),
+                  radial-gradient(900px 600px at 80% 30%, var(--bg1), transparent 60%),
+                  linear-gradient(180deg, #ffffff, #f7f7f7);
     }
 
     .card{
-      width: min(980px, 100%);
-      border-radius: var(--radius);
-      overflow:hidden;
+      width:min(920px, 92vw);
+      min-height:min(520px, 86vh);
+      background: rgba(255,255,255,.85);
+      border-radius: 28px;
       box-shadow: var(--shadow);
-      border: 1px solid rgba(255, 211, 107, .25);
-      background:
-        radial-gradient(1100px 520px at 50% 0%, rgba(255, 211, 107, .10), transparent 60%),
-        linear-gradient(180deg, rgba(58, 27, 15, .92), rgba(28, 13, 8, .92));
-      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0,0,0,.06);
+      overflow:hidden;
+      position:relative;
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 12px;
+      padding: 28px;
     }
 
-    .top{
-      padding: 28px 26px 0;
-      text-align:center;
-    }
-
-    /* EXW logo (real image) */
-    .logoWrap{
+    .left{
       display:flex;
+      flex-direction:column;
       justify-content:center;
-      margin-top: 8px;
-      margin-bottom: 12px;
-    }
-    .logoImg{
-      height: 44px;
-      width: auto;
-      object-fit: contain;
-      filter: drop-shadow(0 10px 16px rgba(0,0,0,.35));
+      padding: 10px 10px 10px 6px;
     }
 
     h1{
-      margin: 10px 0 10px;
-      font-size: clamp(28px, 4.6vw, 52px);
-      letter-spacing: -0.7px;
+      margin:0 0 10px;
+      font-size: clamp(28px, 4vw, 54px);
       line-height:1.05;
-      color: var(--cream);
-      text-shadow: 0 2px 0 rgba(0,0,0,.25);
+      letter-spacing:-0.02em;
     }
 
-    .sub{
-      margin:0 auto;
-      max-width: 68ch;
-      color: rgba(255, 246, 234, .88);
-      line-height: 1.55;
-      font-size: 15.5px;
+    p{
+      margin: 0;
+      font-size: clamp(14px, 1.6vw, 18px);
+      line-height:1.65;
+      opacity:.85;
+      max-width: 42ch;
     }
 
-    .hero{
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      margin-top:18px;
+      padding:10px 14px;
+      border-radius:999px;
+      background: rgba(229,57,53,.10);
+      border: 1px solid rgba(229,57,53,.22);
+      width: fit-content;
+      font-weight:600;
+      color:#8e1a17;
+    }
+
+    .right{
+      display:grid;
+      place-items:center;
       position:relative;
-      padding: 26px 18px 8px;
+    }
+
+    .ginger-wrap{
+      width:min(320px, 55vw);
+      aspect-ratio: 3/4;
       display:grid;
       place-items:center;
+      position:relative;
+      transform: translateZ(0);
     }
 
-    /* cute floating confetti dots (green/red) */
-    .confetti{
+    /* The wiggle animation (GIF-like) */
+    .ginger{
+      width:100%;
+      height:auto;
+      filter: drop-shadow(0 18px 24px rgba(0,0,0,.18));
+      transform-origin: 50% 85%;
+      animation: wiggle 900ms ease-in-out infinite;
+      will-change: transform;
+      user-select:none;
+      -webkit-user-drag:none;
+      cursor:pointer;
+    }
+
+    @keyframes wiggle{
+      0%   { transform: rotate(-6deg) translateX(-6px); }
+      25%  { transform: rotate( 0deg) translateX( 0px); }
+      50%  { transform: rotate( 6deg) translateX( 6px); }
+      75%  { transform: rotate( 0deg) translateX( 0px); }
+      100% { transform: rotate(-6deg) translateX(-6px); }
+    }
+
+    /* little “snow dots” decor */
+    .dot{
       position:absolute;
-      inset:0;
-      pointer-events:none;
-      opacity: .9;
+      width:10px;height:10px;border-radius:50%;
+      background: rgba(229,57,53,.20);
+      box-shadow: 0 0 0 6px rgba(229,57,53,.06);
+      animation: floaty 4.6s ease-in-out infinite;
+      opacity:.9;
     }
-    .confetti span{
-      position:absolute;
-      width:10px;height:10px;
-      border-radius: 4px;
-      transform: rotate(45deg);
-      filter: drop-shadow(0 8px 10px rgba(0,0,0,.25));
-      animation: twinkle 1.8s ease-in-out infinite;
-    }
-    .confetti .g{ background: rgba(18,224,122,.95); }
-    .confetti .r{ background: rgba(255,59,59,.95); }
+    .dot:nth-child(2){ left:10%; top:18%; animation-duration:5.3s; }
+    .dot:nth-child(3){ left:82%; top:20%; animation-duration:6.1s; background: rgba(67,160,71,.20); box-shadow:0 0 0 6px rgba(67,160,71,.06); }
+    .dot:nth-child(4){ left:68%; top:76%; animation-duration:5.7s; }
+    .dot:nth-child(5){ left:18%; top:74%; animation-duration:6.4s; background: rgba(67,160,71,.20); box-shadow:0 0 0 6px rgba(67,160,71,.06); }
 
-    @keyframes twinkle{
-      0%,100%{ transform: rotate(45deg) scale(.78); opacity:.35; }
-      50%{ transform: rotate(45deg) scale(1.18); opacity:.95; }
+    @keyframes floaty{
+      0%,100%{ transform: translateY(0); }
+      50%{ transform: translateY(-16px); }
     }
 
-    /* Gingerbread container (we will replace the character later) */
-    .gingerArea{
-      width: 280px;
-      max-width: 60vw;
-      aspect-ratio: 1 / 1;
-      display:grid;
-      place-items:center;
-    }
-
-    /* placeholder character wiggle (we’ll fix gingerbread next) */
-    .wiggle{
-      width: 210px;
-      max-width: 55vw;
-      transform-origin: 50% 70%;
-      animation: sway 1.15s ease-in-out infinite;
-      filter: drop-shadow(0 16px 18px rgba(0,0,0,.30));
-    }
-    @keyframes sway{
-      0%   { transform: rotate(-7deg) translateX(-10px); }
-      50%  { transform: rotate(7deg)  translateX(10px); }
-      100% { transform: rotate(-7deg) translateX(-10px); }
-    }
-
-    .content{
-      padding: 8px 30px 22px;
-    }
-
-    .divider{
-      height:1px;
-      background: linear-gradient(90deg, transparent, rgba(255,211,107,.35), transparent);
-      margin: 8px 0 18px;
-    }
-
-    .msg{
-      text-align:center;
-      color: rgba(255, 246, 234, .88);
-      line-height:1.7;
-      font-size: 14.5px;
-      max-width: 78ch;
-      margin: 0 auto;
-    }
-
-    .footer{
-      text-align:center;
-      padding: 18px 18px 22px;
-      color: rgba(255, 246, 234, .65);
-      font-size: 12.5px;
-      border-top: 1px solid rgba(255, 211, 107, .18);
-      background: rgba(0,0,0,.12);
-    }
-
-    @media (max-width:520px){
-      .content{ padding: 8px 16px 18px; }
-      .top{ padding: 22px 16px 0; }
-      .logoImg{ height: 40px; }
+    /* Mobile layout */
+    @media (max-width: 780px){
+      .card{ grid-template-columns: 1fr; padding: 22px; }
+      .left{ text-align:center; align-items:center; }
+      p{ max-width: 52ch; }
     }
   </style>
 </head>
 
 <body>
-  <div class="snow" id="snow"></div>
+  <main class="card">
+    <section class="left">
+      <h1>Merry Christmas 🎄</h1>
+      <p>
+        Wishing you warm moments, bright days, and a sweet finish to the year.
+      </p>
+      <div class="badge">Tap the gingerbread to pause/resume</div>
+    </section>
 
-  <main class="wrap">
-    <section class="card" aria-label="EXW Christmas Card">
-
-      <header class="top">
-
-        <!-- Real EXW logo (note the %20 because your file has a space) -->
-        <div class="logoWrap">
-          <img class="logoImg" src="assets/exw%20logo.png" alt="EXW Logo">
-        </div>
-
-        <!-- Season’s Greetings removed ✅ -->
-
-        <h1>Merry Christmas &amp; Happy New Year</h1>
-
-        <p class="sub">
-          Wishing you a warm holiday season and a successful year ahead — from everyone at Excellence Wire (EXW).
-        </p>
-
-        <div class="hero">
-          <div class="confetti" aria-hidden="true">
-            <span class="g" style="left:10%; top:25%; animation-delay:.1s"></span>
-            <span class="r" style="left:20%; top:62%; animation-delay:.7s"></span>
-            <span class="g" style="left:78%; top:26%; animation-delay:.35s"></span>
-            <span class="r" style="left:88%; top:60%; animation-delay:.95s"></span>
-            <span class="g" style="left:50%; top:12%; animation-delay:.5s"></span>
-          </div>
-
-          <div class="gingerArea">
-            <!-- TEMP placeholder (we’ll fix gingerbread next) -->
-            <svg class="wiggle" viewBox="0 0 220 260" xmlns="http://www.w3.org/2000/svg" aria-label="Character">
-              <path d="M110 26
-                       c-20 0-36 16-36 36
-                       c0 9 3 17 8 24
-                       c-19 8-33 27-33 49
-                       c0 21 11 39 28 48
-                       c-9 14-15 33-15 52
-                       c0 18 7 33 18 42
-                       c6 5 14 8 23 8
-                       c10 0 19-4 26-10
-                       c7 6 16 10 26 10
-                       c9 0 17-3 23-8
-                       c11-9 18-24 18-42
-                       c0-19-6-38-15-52
-                       c17-9 28-27 28-48
-                       c0-22-14-41-33-49
-                       c5-7 8-15 8-24
-                       c0-20-16-36-36-36
-                       c-13 0-25 7-31 18
-                       c-6-11-18-18-31-18z"
-                    fill="#d19a64" stroke="#7a3f22" stroke-width="7" stroke-linejoin="round"/>
-
-              <circle cx="88" cy="68" r="7" fill="#2b1b14"/>
-              <circle cx="132" cy="68" r="7" fill="#2b1b14"/>
-              <path d="M92 90 q18 16 36 0" fill="none" stroke="#2b1b14" stroke-width="7" stroke-linecap="round"/>
-
-              <circle cx="110" cy="130" r="8" fill="#ff3b3b" stroke="#8f1f1f" stroke-width="3"/>
-              <circle cx="110" cy="157" r="8" fill="#12e07a" stroke="#0e7b45" stroke-width="3"/>
-              <circle cx="110" cy="184" r="8" fill="#ffd36b" stroke="#a37712" stroke-width="3"/>
-            </svg>
-          </div>
-        </div>
-
-      </header>
-
-      <section class="content">
-        <div class="divider"></div>
-
-        <p class="msg">
-          Thank you for your trust and partnership throughout the year. We look forward to creating more value together
-          in the year ahead.
-          <br><br>
-          Warm wishes for a joyful holiday season and a successful New Year.
-        </p>
-      </section>
-
-      <footer class="footer">
-        © <span id="year"></span> Excellence Wire Ind. Co., Ltd. (EXW)
-      </footer>
-
+    <section class="right">
+      <div class="ginger-wrap" aria-label="Wiggling gingerbread man">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <!-- Put your image file in the repo as: gingerbread.jpg -->
+        <img class="ginger" id="ginger" src="gingerbread.jpg" alt="Gingerbread man" />
+      </div>
     </section>
   </main>
 
   <script>
-    // Year
-    document.getElementById("year").textContent = new Date().getFullYear();
+    // Click to pause/resume animation (handy when previewing)
+    const ginger = document.getElementById("ginger");
+    let paused = false;
 
-    // Snow / sparkle dots
-    const snow = document.getElementById("snow");
-    const COUNT = 95;
-
-    function rand(min, max){ return Math.random() * (max - min) + min; }
-
-    for(let i=0;i<COUNT;i++){
-      const f = document.createElement("div");
-      f.className = "flake";
-      const size = rand(2, 7);
-      f.style.width = size + "px";
-      f.style.height = size + "px";
-      f.style.left = rand(0, 100) + "vw";
-      f.style.opacity = rand(0.18, 0.95);
-      f.style.animationDuration = rand(7, 18) + "s";
-      f.style.animationDelay = rand(-18, 0) + "s";
-      f.style.transform = `translateY(${rand(-30, 10)}vh)`;
-      snow.appendChild(f);
-    }
+    ginger.addEventListener("click", () => {
+      paused = !paused;
+      ginger.style.animationPlayState = paused ? "paused" : "running";
+    });
   </script>
 </body>
 </html>
