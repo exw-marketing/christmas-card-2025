@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>EXW Christmas Card</title>
+  <title>EXW Christmas Card（中文版）</title>
 
-  <!-- Google Font: Great Vibes (for "Merry Christmas") -->
+  <!-- Great Vibes for "Merry Christmas" -->
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
   <style>
@@ -21,13 +21,14 @@
     body{
       margin:0;
       min-height:100vh;
-      /* Better Chinese font fallback */
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Noto Sans TC", "PingFang TC",
-                   "Microsoft JhengHei", "Heiti TC", sans-serif;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
+                   "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Heiti TC", sans-serif;
       color: var(--white);
-      overflow:hidden;
 
-      /* Background like reference image */
+      /* ✅ allow scroll when content is long */
+      overflow-x:hidden;
+      overflow-y:auto;
+
       background-image:
         linear-gradient(0deg, rgba(0,0,0,.12), rgba(0,0,0,.12)),
         url("./assets/bg-green-stars.png");
@@ -56,7 +57,8 @@
 
     .card{
       width:min(1050px,94vw);
-      min-height:min(640px,86vh);
+      min-height: 640px;   /* ✅ no vh cap; card can grow */
+      height:auto;
       border-radius:30px;
       position:relative;
       box-shadow:var(--shadow);
@@ -80,40 +82,67 @@
       height:100%;
       display:grid;
       grid-template-columns:1.15fr .85fr;
-      gap:10px;
-      padding:64px 56px;
+      gap: 22px;
+      padding: 64px 56px;
+      align-items:center;
     }
 
     .left{
       display:flex;
       flex-direction:column;
       justify-content:center;
+      min-width:0;
     }
 
-    /* Keep "Merry Christmas" in Great Vibes */
+    /* Title stays English */
     .title{
-      font-family: "Great Vibes", cursive;
-      font-size: clamp(44px, 5vw, 72px);
-      font-weight: 400;
-      margin: 0 0 22px;
-      letter-spacing: .02em;
-      text-shadow: 0 8px 18px rgba(0,0,0,.25);
+      font-family:"Great Vibes", cursive;
+      font-size: clamp(46px, 5.2vw, 78px);
+      font-weight:400;
+      margin: 0 0 14px;
+      letter-spacing:.02em;
+      text-shadow:0 8px 18px rgba(0,0,0,.25);
+      line-height:1.05;
     }
 
-    .msg{
-      font-size:clamp(14px,1.4vw,17px);
-      line-height:1.9;
+    /* ✅ Long-text typography (pretty, readable) */
+    .letter{
+      margin-top: 10px;
       max-width: 62ch;
-      color:rgba(255,255,255,.92);
-      white-space:pre-line;
-      letter-spacing: .01em;
+      color: rgba(255,255,255,.92);
+      font-size: clamp(14px, 1.35vw, 17px);
+      line-height: 2.0;
+      letter-spacing: .02em;
+    }
+
+    .salutation{
+      font-weight: 700;
+      margin: 10px 0 18px;
+      color: rgba(255,255,255,.96);
+    }
+
+    .p{
+      margin: 0 0 18px;
+    }
+
+    /* A gentle divider space before closing */
+    .closing{
+      margin-top: 8px;
+    }
+
+    .closing .p{ margin-bottom: 10px; }
+
+    .signoff{
+      margin-top: 10px;
+      font-weight: 700;
+      color: rgba(255,255,255,.96);
     }
 
     .brand-row{
-      margin-top:26px;
+      margin-top: 22px;
       display:flex;
       align-items:center;
-      gap:14px;
+      gap: 14px;
     }
 
     .exw-logo{
@@ -124,11 +153,13 @@
     .brand-text{
       font-weight:700;
       letter-spacing:.02em;
+      color: rgba(255,255,255,.95);
     }
 
     .right{
       display:grid;
       place-items:center;
+      min-width:0;
     }
 
     .photo-card{
@@ -157,24 +188,29 @@
       height:100%;
       object-fit:contain;
       display:block;
-      animation:none;
-      transform:none;
       filter:none;
       user-select:none;
       -webkit-user-drag:none;
     }
 
-    @media (max-width:860px){
-      body{ overflow:auto; }
+    /* Mobile */
+    @media (max-width: 900px){
       .content{
         grid-template-columns:1fr;
         padding:44px 26px;
+        gap: 18px;
       }
       .right{ order:-1; }
       .photo-card{
         transform:rotate(6deg);
         width:min(320px,78vw);
       }
+      .letter{ max-width: 70ch; }
+    }
+
+    @media (max-width: 420px){
+      .title{ font-size: 54px; }
+      .letter{ line-height: 1.9; }
     }
   </style>
 </head>
@@ -183,32 +219,10 @@
   <canvas id="snow"></canvas>
 
   <div class="wrap">
-    <main class="card">
-      <div class="frame"></div>
+    <main class="card" role="main" aria-label="Christmas card Chinese version">
+      <div class="frame" aria-hidden="true"></div>
 
       <section class="content">
-        <div class="left">
-          <h1 class="title">Merry Christmas</h1>
-
-          <p class="msg">親愛的客戶您好：
-
-隨著聖誕節的腳步越來越近，我們想藉這個溫馨的時刻，感謝您長期以來的支持與信任，讓我們能一路攜手合作、共同成長！每一次的合作，對我們來說都是寶貴的經驗，也鼓勵我們不斷進步。
-
-展望即將到來的新一年，我們期待持續以創新技術與專業服務，與您保持緊密合作，一起創造更多價值與新的可能。
-
-在歲末年終、佳節將至之際，衷心祝福您與家人、親友度過一個溫暖愉快的聖誕節，並迎接充滿希望與好成果的新一年。
-
-敬祝
-順心如意、業績長紅
-
-卓新工業 全體同仁 敬上</p>
-
-          <div class="brand-row">
-            <img class="exw-logo" src="./assets/exw-logo.png" alt="EXW logo">
-            <div class="brand-text">Excellence Wire Ind. Co., Ltd</div>
-          </div>
-        </div>
-
         <div class="right">
           <div class="photo-card">
             <img class="ginger"
@@ -216,11 +230,45 @@
                  alt="Gingerbread holding keystone jack">
           </div>
         </div>
+
+        <div class="left">
+          <h1 class="title">Merry Christmas</h1>
+
+          <div class="letter">
+            <div class="salutation">親愛的客戶您好：</div>
+
+            <p class="p">
+              隨著聖誕節的腳步越來越近，我們想藉這個溫馨的時刻，向您表達最真誠的感謝。感謝您長期以來的支持與信任，
+              讓我們能一路攜手合作、共同成長！每一次的合作，對我們來說都是寶貴的經驗，也鼓勵我們不斷進步。
+            </p>
+
+            <p class="p">
+              展望即將到來的新一年，我們期待持續以創新技術與專業服務，與您保持緊密合作，一起創造更多價值與新的可能。
+            </p>
+
+            <p class="p">
+              在歲末年終、佳節將至之際，衷心祝福您與家人、親友度過一個溫暖愉快的聖誕節，
+              並迎接充滿希望與好成果的新一年。
+            </p>
+
+            <div class="closing">
+              <p class="p">敬祝</p>
+              <p class="p">順心如意、業績長紅</p>
+              <div class="signoff">卓新工業 全體同仁 敬上</div>
+            </div>
+
+            <div class="brand-row">
+              <img class="exw-logo" src="./assets/exw-logo.png" alt="EXW logo">
+              <div class="brand-text">Excellence Wire Ind. Co., Ltd</div>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
   </div>
 
   <script>
+    // Falling snow (lightweight canvas)
     const canvas = document.getElementById("snow");
     const ctx = canvas.getContext("2d");
 
@@ -281,3 +329,4 @@
   </script>
 </body>
 </html>
+
