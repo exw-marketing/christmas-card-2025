@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>EXW Christmas Card</title>
 
+  <!-- Google Font: Great Vibes -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
   <style>
     :root{
       --red1:#8b0f18;
@@ -22,7 +25,6 @@
       color: var(--white);
       overflow:hidden;
 
-      /* Background like reference image */
       background-image:
         linear-gradient(0deg, rgba(0,0,0,.12), rgba(0,0,0,.12)),
         url("./assets/bg-green-stars.png");
@@ -85,11 +87,14 @@
       justify-content:center;
     }
 
+    /* 🎄 Merry Christmas title */
     .title{
-      font-size:clamp(38px,4.5vw,62px);
-      font-weight:800;
-      margin:0 0 18px;
-      text-shadow:0 8px 18px rgba(0,0,0,.22);
+      font-family: "Great Vibes", cursive;
+      font-size: clamp(44px, 5vw, 72px);
+      font-weight: 400;
+      margin: 0 0 22px;
+      letter-spacing: .02em;
+      text-shadow: 0 8px 18px rgba(0,0,0,.25);
     }
 
     .msg{
@@ -227,7 +232,6 @@ All EXW Team Members</p>
 
     const flakes=[];
     const COUNT=Math.min(160,Math.max(80,w/8));
-
     function rand(min,max){ return Math.random()*(max-min)+min; }
 
     for(let i=0;i<COUNT;i++){
@@ -269,4 +273,5 @@ All EXW Team Members</p>
   </script>
 </body>
 </html>
+
 
