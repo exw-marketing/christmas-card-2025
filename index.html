@@ -1,287 +1,290 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>EXW Christmas Card</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>EXW wishes you a Merry Christmas</title>
 
-  <!-- Great Vibes for "Merry Christmas" -->
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
-  <style>
-    :root{
-      --red1:#8b0f18;
-      --red2:#b31622;
-      --white:#ffffff;
-      --shadow:0 26px 70px rgba(0,0,0,.22);
-    }
+<style>
+:root{
+  --red1:#8f141b;
+  --red2:#b51d26;
+  --white:#ffffff;
+}
 
-    *{ box-sizing:border-box; }
+/* Reset */
+*{ box-sizing:border-box; margin:0; padding:0; }
 
-    body{
-      margin:0;
-      min-height:100vh;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
-                   "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Heiti TC", sans-serif;
-      color: var(--white);
+body{
+  min-height:100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+               "PingFang TC", "Microsoft JhengHei", sans-serif;
+  color:var(--white);
+  background:
+    url("./assets/bg-green-stars.png") center / cover no-repeat fixed;
+  overflow-x:hidden;
+}
 
-      /* ✅ allow scrolling */
-      overflow-x: hidden;
-      overflow-y: auto;
+/* Snow canvas */
+#snow{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+}
 
-      background-image:
-        linear-gradient(0deg, rgba(0,0,0,.12), rgba(0,0,0,.12)),
-        url("./assets/bg-green-stars.png");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-    }
+/* Center wrapper */
+.wrap{
+  position:relative;
+  z-index:1;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:32px;
+}
 
-    /* Snow canvas */
-    #snow{
-      position:fixed;
-      inset:0;
-      z-index:0;
-      pointer-events:none;
-    }
+/* Card */
+.card{
+  width:min(1100px, 100%);
+  border-radius:28px;
+  padding:56px;
+  background:
+    radial-gradient(800px 400px at 20% 10%, rgba(255,255,255,.12), transparent 60%),
+    linear-gradient(180deg, var(--red2), var(--red1));
+  box-shadow:0 30px 70px rgba(0,0,0,.35);
+  position:relative;
+}
 
-    .wrap{
-      position:relative;
-      z-index:1;
-      min-height:100vh;
-      display:grid;
-      place-items:center;
-      padding:28px;
-    }
+/* Inner frame */
+.card::after{
+  content:"";
+  position:absolute;
+  inset:16px;
+  border-radius:22px;
+  border:1px solid rgba(255,255,255,.35);
+  pointer-events:none;
+}
 
-    .card{
-      width:min(1050px,94vw);
-      min-height:640px;   /* ✅ no vh limit */
-      height:auto;
-      border-radius:30px;
-      position:relative;
-      box-shadow:var(--shadow);
-      overflow:hidden;
-      background:
-        radial-gradient(900px 500px at 20% 10%, rgba(255,255,255,.10), transparent 55%),
-        radial-gradient(900px 500px at 80% 20%, rgba(0,0,0,.15), transparent 55%),
-        linear-gradient(180deg,var(--red2),var(--red1));
-      border:1px solid rgba(255,255,255,.18);
-    }
+/* Layout */
+.content{
+  display:grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap:32px;
+  align-items:center;
+}
 
-    .frame{
-      position:absolute;
-      inset:18px;
-      border-radius:22px;
-      border:2px solid rgba(255,255,255,.25);
-      pointer-events:none;
-    }
+/* Left */
+.left{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
 
-    .content{
-      height:100%;
-      display:grid;
-      grid-template-columns:1.15fr .85fr;
-      gap:22px;
-      padding:64px 56px;
-      align-items:center;
-    }
+.title{
+  font-family:"Great Vibes", cursive;
+  font-size:clamp(44px, 5vw, 64px);
+  font-weight:400;
+  text-align:left;
+}
 
-    .left{
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      min-width:0;
-    }
+/* Message */
+.msg{
+  font-size:16px;
+  line-height:1.9;
+  white-space:pre-line;
+  opacity:.95;
+}
 
-    .title{
-      font-family:"Great Vibes", cursive;
-      font-size: clamp(46px, 5.2vw, 78px);
-      font-weight:400;
-      margin: 0 0 18px;
-      letter-spacing:.02em;
-      text-shadow:0 8px 18px rgba(0,0,0,.25);
-      line-height:1.05;
-    }
+/* Brand */
+.brand-row{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-top:18px;
+}
 
-    /* ✅ Long text tuned but SAME layout */
-    .msg{
-      font-size: clamp(14px,1.35vw,17px);
-      line-height: 2.0;
-      max-width: 62ch;
-      color: rgba(255,255,255,.92);
-      white-space: pre-line;
-      letter-spacing: .02em;
-    }
+.exw-logo{
+  height:34px;
+}
 
-    .brand-row{
-      margin-top: 26px;
-      display:flex;
-      align-items:center;
-      gap:14px;
-    }
+.brand-text{
+  font-weight:700;
+  letter-spacing:.02em;
+}
 
-    .exw-logo{
-      height:34px;
-      filter:drop-shadow(0 6px 10px rgba(0,0,0,.22));
-    }
+/* Right */
+.right{
+  display:flex;
+  justify-content:center;
+}
 
-    .brand-text{
-      font-weight:700;
-      letter-spacing:.02em;
-      color: rgba(255,255,255,.95);
-    }
+.photo-card{
+  width:320px;
+  aspect-ratio:3/4;
+  background:rgba(255,255,255,.92);
+  border-radius:18px;
+  padding:14px;
+  transform:rotate(8deg);
+  border:1px solid rgba(255,255,255,.6);
+}
 
-    .right{
-      display:grid;
-      place-items:center;
-      min-width:0;
-    }
+.photo-card::before{
+  content:"";
+  position:absolute;
+  inset:10px;
+  border-radius:14px;
+  border:1px solid rgba(0,0,0,.06);
+}
 
-    .photo-card{
-      width:min(340px,48vw);
-      aspect-ratio:3/4;
-      background:rgba(255,255,255,.92);
-      border-radius:18px;
-      box-shadow:0 18px 40px rgba(0,0,0,.28);
-      border:1px solid rgba(255,255,255,.55);
-      padding:14px;
-      transform:rotate(8deg);
-      position:relative;
-    }
+.ginger{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+  user-select:none;
+  filter:none;
+}
 
-    .photo-card::before{
-      content:"";
-      position:absolute;
-      inset:10px;
-      border-radius:14px;
-      border:1px solid rgba(0,0,0,.06);
-      pointer-events:none;
-    }
+/* ========================= */
+/* 📱 Mobile */
+@media (max-width:860px){
 
-    .ginger{
-      width:100%;
-      height:100%;
-      object-fit:contain;
-      display:block;
-      filter:none;
-      user-select:none;
-      -webkit-user-drag:none;
-    }
+  body{ overflow:auto; }
 
-    /* Mobile */
-    @media (max-width: 900px){
-      .content{
-        grid-template-columns:1fr;
-        padding:44px 26px;
-        gap:18px;
-      }
-      .right{ order:-1; }
-      .photo-card{
-        transform:rotate(6deg);
-        width:min(320px,78vw);
-      }
-    }
-  </style>
+  .wrap{
+    align-items:flex-start;
+    padding:20px;
+  }
+
+  .card{
+    padding:36px 26px;
+    margin:0 auto;
+  }
+
+  .content{
+    grid-template-columns:1fr;
+    gap:28px;
+  }
+
+  .right{
+    order:-1;
+  }
+
+  .photo-card{
+    margin:0 auto;
+    transform:rotate(6deg);
+  }
+
+  /* Title centered */
+  .title{
+    text-align:center;
+  }
+
+  /* ✅ Chinese text LEFT aligned */
+  .msg{
+    text-align:left;
+  }
+
+  /* Brand centered */
+  .brand-row{
+    justify-content:center;
+    text-align:center;
+  }
+}
+
+/* Snow animation */
+canvas{ display:block; }
+</style>
 </head>
 
 <body>
-  <canvas id="snow"></canvas>
 
-  <div class="wrap">
-    <main class="card" role="main" aria-label="Christmas card Chinese version">
-      <div class="frame" aria-hidden="true"></div>
+<canvas id="snow"></canvas>
 
-      <section class="content">
-        <div class="left">
-          <h1 class="title">Merry Christmas</h1>
+<div class="wrap">
+  <main class="card">
+    <section class="content">
 
-          <p class="msg">Dear Valued Customer,
+      <div class="left">
+        <h1 class="title">Merry Christmas</h1>
 
-As Christmas approaches, we would like to extend our sincere appreciation for your continued support and partnership. We truly value the trust you place in us and are grateful for the opportunity to work with you.
+        <p class="msg">親愛的客戶您好：
 
-Looking ahead to the new year, we look forward to continuing to work closely with you, combining our innovative technology with professional service to create greater value and new opportunities together.
+隨著聖誕節的腳步越來越近，我們想藉這個溫馨的時刻，向您表達最真誠的感謝。感謝您長期以來的支持與信任，讓我們能一路攜手合作、共同成長！
 
-Wishing you and your family a warm, joyful, and peaceful Christmas season.
+展望即將到來的新一年，我們期待持續以創新技術與專業服務，與您保持緊密合作，一起創造更多價值與新的可能。
 
-Sincerely,
-All EXW Team Members</p>
+在歲末年終、佳節將至之際，衷心祝福您與家人、親友度過一個溫暖愉快的聖誕節，並迎接充滿希望與好成果的新一年。
 
-          <div class="brand-row">
-            <img class="exw-logo" src="./assets/exw-logo.png" alt="EXW logo">
-            <div class="brand-text">Excellence Wire Ind. Co., Ltd</div>
-          </div>
+敬祝
+順心如意、業績長紅
+
+卓新工業 全體同仁 敬上</p>
+
+        <div class="brand-row">
+          <img class="exw-logo" src="./assets/exw-logo.png" alt="EXW logo">
+          <div class="brand-text">Excellence Wire Ind. Co., Ltd</div>
         </div>
+      </div>
 
-        <div class="right">
-          <div class="photo-card">
-            <img class="ginger"
-                 src="./assets/gingerbread and keystone jack.gif"
-                 alt="Gingerbread holding keystone jack">
-          </div>
+      <div class="right">
+        <div class="photo-card">
+          <img class="ginger" src="./assets/gingerbread and keystone jack.gif" alt="Gingerbread">
         </div>
-      </section>
-    </main>
-  </div>
+      </div>
 
-  <script>
-    const canvas = document.getElementById("snow");
-    const ctx = canvas.getContext("2d");
+    </section>
+  </main>
+</div>
 
-    let w, h, dpr;
-    function resize(){
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      w = window.innerWidth;
-      h = window.innerHeight;
-      canvas.width = w * dpr;
-      canvas.height = h * dpr;
-      canvas.style.width = w + "px";
-      canvas.style.height = h + "px";
-      ctx.setTransform(dpr,0,0,dpr,0,0);
-    }
-    window.addEventListener("resize", resize);
-    resize();
+<script>
+const canvas = document.getElementById('snow');
+const ctx = canvas.getContext('2d');
+let w,h,dpr;
 
-    const flakes=[];
-    const COUNT=Math.min(160,Math.max(80,w/8));
-    function rand(min,max){ return Math.random()*(max-min)+min; }
+function resize(){
+  dpr = Math.min(window.devicePixelRatio||1,2);
+  w = window.innerWidth;
+  h = window.innerHeight;
+  canvas.width = w*dpr;
+  canvas.height = h*dpr;
+  canvas.style.width = w+"px";
+  canvas.style.height = h+"px";
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+}
+window.addEventListener('resize',resize);
+resize();
 
-    for(let i=0;i<COUNT;i++){
-      flakes.push({
-        x:rand(0,w),
-        y:rand(-h,h),
-        r:rand(1.5,3.5),
-        s:rand(.6,1.6),
-        dx:rand(-.35,.35),
-        o:rand(.4,.9)
-      });
-    }
+const flakes=[];
+for(let i=0;i<120;i++){
+  flakes.push({
+    x:Math.random()*w,
+    y:Math.random()*h,
+    r:Math.random()*2+1,
+    s:Math.random()*1.2+.4,
+    o:Math.random()*.6+.3
+  });
+}
 
-    function draw(){
-      ctx.clearRect(0,0,w,h);
-      ctx.shadowColor="rgba(255,255,255,.55)";
-      ctx.shadowBlur=6;
-      ctx.fillStyle="#fff";
+function draw(){
+  ctx.clearRect(0,0,w,h);
+  for(const f of flakes){
+    ctx.globalAlpha=f.o;
+    ctx.beginPath();
+    ctx.arc(f.x,f.y,f.r,0,Math.PI*2);
+    ctx.fillStyle="#fff";
+    ctx.fill();
+    f.y+=f.s;
+    if(f.y>h){ f.y=-10; f.x=Math.random()*w; }
+  }
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
 
-      for(const f of flakes){
-        ctx.globalAlpha=f.o;
-        ctx.beginPath();
-        ctx.arc(f.x,f.y,f.r,0,Math.PI*2);
-        ctx.fill();
-
-        f.y+=f.s;
-        f.x+=f.dx+Math.sin(f.y/80)*.12;
-
-        if(f.y>h){ f.y=-10; f.x=rand(0,w); }
-        if(f.x<-20) f.x=w+20;
-        if(f.x>w+20) f.x=-20;
-      }
-
-      ctx.globalAlpha=1;
-      ctx.shadowBlur=0;
-      requestAnimationFrame(draw);
-    }
-    draw();
-  </script>
 </body>
 </html>
