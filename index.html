@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>EXW Christmas Card</title>
+  <title>EXW Christmas Card（中文版）</title>
 
-  <!-- Google Font: Great Vibes -->
+  <!-- Great Vibes for "Merry Christmas" -->
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
   <style>
@@ -21,9 +21,13 @@
     body{
       margin:0;
       min-height:100vh;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans";
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
+                   "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Heiti TC", sans-serif;
       color: var(--white);
-      overflow:hidden;
+
+      /* ✅ allow scrolling */
+      overflow-x: hidden;
+      overflow-y: auto;
 
       background-image:
         linear-gradient(0deg, rgba(0,0,0,.12), rgba(0,0,0,.12)),
@@ -53,7 +57,8 @@
 
     .card{
       width:min(1050px,94vw);
-      min-height:min(640px,86vh);
+      min-height:640px;   /* ✅ no vh limit */
+      height:auto;
       border-radius:30px;
       position:relative;
       box-shadow:var(--shadow);
@@ -77,36 +82,40 @@
       height:100%;
       display:grid;
       grid-template-columns:1.15fr .85fr;
-      gap:10px;
+      gap:22px;
       padding:64px 56px;
+      align-items:center;
     }
 
     .left{
       display:flex;
       flex-direction:column;
       justify-content:center;
+      min-width:0;
     }
 
-    /* 🎄 Merry Christmas title */
     .title{
-      font-family: "Great Vibes", cursive;
-      font-size: clamp(44px, 5vw, 72px);
-      font-weight: 400;
-      margin: 0 0 22px;
-      letter-spacing: .02em;
-      text-shadow: 0 8px 18px rgba(0,0,0,.25);
+      font-family:"Great Vibes", cursive;
+      font-size: clamp(46px, 5.2vw, 78px);
+      font-weight:400;
+      margin: 0 0 18px;
+      letter-spacing:.02em;
+      text-shadow:0 8px 18px rgba(0,0,0,.25);
+      line-height:1.05;
     }
 
+    /* ✅ Long text tuned but SAME layout */
     .msg{
-      font-size:clamp(15px,1.6vw,18px);
-      line-height:1.8;
-      max-width:60ch;
-      color:rgba(255,255,255,.92);
-      white-space:pre-line;
+      font-size: clamp(14px,1.35vw,17px);
+      line-height: 2.0;
+      max-width: 62ch;
+      color: rgba(255,255,255,.92);
+      white-space: pre-line;
+      letter-spacing: .02em;
     }
 
     .brand-row{
-      margin-top:26px;
+      margin-top: 26px;
       display:flex;
       align-items:center;
       gap:14px;
@@ -120,11 +129,13 @@
     .brand-text{
       font-weight:700;
       letter-spacing:.02em;
+      color: rgba(255,255,255,.95);
     }
 
     .right{
       display:grid;
       place-items:center;
+      min-width:0;
     }
 
     .photo-card{
@@ -153,18 +164,17 @@
       height:100%;
       object-fit:contain;
       display:block;
-      animation:none;
-      transform:none;
       filter:none;
       user-select:none;
       -webkit-user-drag:none;
     }
 
-    @media (max-width:860px){
-      body{ overflow:auto; }
+    /* Mobile */
+    @media (max-width: 900px){
       .content{
         grid-template-columns:1fr;
         padding:44px 26px;
+        gap:18px;
       }
       .right{ order:-1; }
       .photo-card{
@@ -179,8 +189,8 @@
   <canvas id="snow"></canvas>
 
   <div class="wrap">
-    <main class="card">
-      <div class="frame"></div>
+    <main class="card" role="main" aria-label="Christmas card Chinese version">
+      <div class="frame" aria-hidden="true"></div>
 
       <section class="content">
         <div class="left">
@@ -275,5 +285,3 @@ All EXW Team Members</p>
   </script>
 </body>
 </html>
-
-
